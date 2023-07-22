@@ -1,5 +1,20 @@
 pipeline {
     agent any
+    
+    parameters {
+        choice(
+            choices: ['Clonar repositorio', 'Compilar y empaquetar', 'Despliegue en desarrollo'],
+            description: 'Seleccione la etapa que desea ejecutar',
+            name: 'ETAPA_EJECUTAR'
+        )
+    }
+
+     environment {
+            // Definir el puerto en el que deseas ejecutar la aplicación Spring Boot
+            PORT = '9595'
+            URL = '/Users/gabriel/Applications'
+    }
+
     stages {
         stage('Clonar repositorio') {
             steps {
@@ -23,6 +38,15 @@ pipeline {
             steps {
                 // Aquí agregarías los comandos para desplegar tu aplicación en el entorno de producción.
                 // Pueden ser comandos para copiar archivos a servidores, configurar servicios, etc.
+            }
+        }
+        stage('Despliegue en desarrollo') {
+            steps {
+                // Copiar el archivo JAR empaquetado a la carpeta de destino
+                sh 'cp gradle/wrapper/gradle-wrapper.jar ${URL}/'
+
+                // Ejecutar la aplicación en el puerto definido
+                sh 'java -jar ${URL}/gradle-wrapper.jar --server.port=${PORT}'
             }
         }
     }
