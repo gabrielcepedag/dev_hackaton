@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    stages {
+        stage('Clonar repositorio') {
+            steps {
+                git 'URL_DEL_REPOSITORIO_GIT'
+            }
+        }
+        stage('Compilar y empaquetar') {
+            steps {
+                // Aquí agregarías los comandos para compilar y empaquetar tu proyecto, ya sea con Gradle o Maven.
+                // Por ejemplo, para Gradle: sh './gradlew clean build'
+                // Y para Maven: sh 'mvn clean package'
+            }
+        }
+        stage('Desplegar desarrollo') {
+            steps {
+                // Aquí agregarías los comandos para desplegar tu aplicación en el entorno de desarrollo.
+                // Por ejemplo, para Spring Boot: sh 'java -jar nombre-del-jar.jar'
+            }
+        }
+        stage('Desplegar producción') {
+            steps {
+                // Aquí agregarías los comandos para desplegar tu aplicación en el entorno de producción.
+                // Pueden ser comandos para copiar archivos a servidores, configurar servicios, etc.
+            }
+        }
+    }
+}
