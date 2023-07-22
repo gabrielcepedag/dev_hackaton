@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+
     parameters {
         choice(
             choices: ['Clonar repositorio', 'Compilar y empaquetar', 'Despliegue en desarrollo'],

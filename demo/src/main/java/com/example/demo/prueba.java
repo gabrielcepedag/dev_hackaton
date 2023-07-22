@@ -8,6 +8,7 @@ public class prueba {
 
     @GetMapping("/hello")
     public String index() {
+        System.out.println("Hola soy yoooo");
         return "Hello World ma fucki";
     }
 }
